@@ -6,7 +6,7 @@ spec:
   generators:
     - list:
         elements:
-          - cluster: gke_arcfdr-test-deployment_europe-west1-b_financial
+          - cluster: financial
             url: https://35.195.72.93
             argocdHost: argocd-server.financial.anthos.val.arkea-gcp.net
   template:
