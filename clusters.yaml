@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: clusters
+spec:
+  generators:
+    - list:
+        elements:
+          - cluster: gke_arcfdr-test-deployment_europe-west1-b_financial
+            url: https://35.195.72.93
+            argocdHost: argocd-server.financial.anthos.val.arkea-gcp.net
+  template:
+    metadata:
+      name: "{{cluster}}-cluster-client"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/ybelleguic/client-clusters.git
+        targetRevision: HEAD
+        path: clusters
+        helm:
+          parameters:
+            - name: argocdHost
+              value: "{{argocdHost}}"
+      destination:
+        server: "{{url}}"
+        namespace: argocd
