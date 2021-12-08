@@ -4,7 +4,7 @@ metadata:
   name: argocd
 spec:
   hosts:
-    - { { .Values.argocdHost } }
+    - {{ .Values.argocdHost }}
   gateways:
     - istio-ingressgateway/istio-ingressgateway
   http:
